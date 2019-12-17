@@ -1,0 +1,10 @@
+C:\Users\setho\source\repos\StudentExercisesAPI\StudentExercisesAPI\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\setho\source\repos\StudentExercisesAPI\StudentExercisesAPI\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\setho\source\repos\StudentExercisesAPI\StudentExercisesAPI\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
+C:\Users\setho\source\repos\StudentExercisesAPI\StudentExercisesAPI\bin\Debug\netcoreapp3.1\StudentExercisesAPI.exe
+C:\Users\setho\source\repos\StudentExercisesAPI\StudentExercisesAPI\obj\Debug\netcoreapp3.1\StudentExercisesAPI.csprojAssemblyReference.cache
+C:\Users\setho\source\repos\StudentExercisesAPI\StudentExercisesAPI\obj\Debug\netcoreapp3.1\staticwebassets\StudentExercisesAPI.StaticWebAssets.Manifest.cache
+C:\Users\setho\source\repos\StudentExercisesAPI\StudentExercisesAPI\obj\Debug\netcoreapp3.1\staticwebassets\StudentExercisesAPI.StaticWebAssets.xml
+C:\Users\setho\source\repos\StudentExercisesAPI\StudentExercisesAPI\obj\Debug\netcoreapp3.1\StudentExercisesAPI.AssemblyInfoInputs.cache
+C:\Users\setho\source\repos\StudentExercisesAPI\StudentExercisesAPI\obj\Debug\netcoreapp3.1\StudentExercisesAPI.AssemblyInfo.cs
+C:\Users\setho\source\repos\StudentExercisesAPI\StudentExercisesAPI\obj\Debug\netcoreapp3.1\StudentExercisesAPI.RazorTargetAssemblyInfo.cache
