@@ -9,7 +9,7 @@ using StudentExercisesAPI.Models;
 using Microsoft.AspNetCore.Http;
 using System.Data.SqlClient;
 
-namespace CoffeeShop.Controllers
+namespace StudentExercisesAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -112,8 +112,7 @@ namespace CoffeeShop.Controllers
                                         OUTPUT INSERTED.Id
                                         VALUES (@name)";
                     cmd.Parameters.Add(new SqlParameter("@name", cohort.Name));
-
-                    int newId = (int)cmd.ExecuteScalar();
+                    int newId = (int) await cmd.ExecuteScalarAsync();
                     cohort.Id = newId;
                     return CreatedAtRoute("GetCohort", new { id = newId }, cohort);
                 }
