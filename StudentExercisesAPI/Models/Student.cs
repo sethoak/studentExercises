@@ -9,6 +9,7 @@
         public string SlackHandle { get; set; }
         public Cohort Cohort { get; set; }
         public Exercise Exercise { get; set; }
+        public Instructors Instructor { get; set; }
 
     }
 }

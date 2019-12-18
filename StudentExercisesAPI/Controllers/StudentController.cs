@@ -41,18 +41,19 @@ namespace StudentExercisesAPI.Controllers
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT s.Id, s.FirstName, s.LastName, s.CohortId, s.SlackHandle , c.[Name] AS CohortName, c.Id AS CohortNameId, e.Name AS ExerciseName, e.Language AS ExerciseLanguage
+                    cmd.CommandText = @"SELECT s.Id, s.FirstName, s.LastName, s.CohortId, s.SlackHandle , c.[Name] AS CohortName, c.Id AS CohortNameId, e.Name AS ExerciseName, e.Language AS ExerciseLanguage, i.FirstName AS InstructorFirstName, i.LastName AS InstructorLastName, i.CohortId AS InstructorCohortId
                                       FROM Student s
                                       LEFT JOIN Cohort c ON s.CohortId = c.Id
+                                      LEFT JOIN Instructor i ON c.Id = i.CohortId
                                       INNER JOIN  StudentExercise se ON se.StudentId = s.Id
                                       INNER JOIN Exercise e ON e.Id = se.ExerciseId";
                     SqlDataReader reader = cmd.ExecuteReader();
                     List<Student> students = new List<Student>();
+                    List<Instructors> instructors = new List<Instructors>();
 
                     while (reader.Read())
                     {
                        
-
                         Student student = new Student
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
@@ -73,6 +74,14 @@ namespace StudentExercisesAPI.Controllers
                                 Id = reader.GetInt32(reader.GetOrdinal("Id")),
                                 Name = reader.GetString(reader.GetOrdinal("ExerciseName")),
                                 Language = reader.GetString(reader.GetOrdinal("ExerciseLanguage"))
+                            },
+
+                            Instructor = new Instructors()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                CohortId = reader.GetInt32(reader.GetOrdinal("InstructorCohortId")),
+                                FirstName = reader.GetString(reader.GetOrdinal("InstructorFirstName")),
+                                LastName = reader.GetString(reader.GetOrdinal("InstructorLastName"))
                             }
                         };
 
