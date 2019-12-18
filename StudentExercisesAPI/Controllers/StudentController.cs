@@ -41,7 +41,7 @@ namespace StudentExercisesAPI.Controllers
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "SELECT Id, firstName FROM Student";
+                    cmd.CommandText = "SELECT Id, FirstName, LastName, CohortId, SlackHandle FROM Student";
                     SqlDataReader reader = cmd.ExecuteReader();
                     List<Student> students = new List<Student>();
 
@@ -50,6 +50,10 @@ namespace StudentExercisesAPI.Controllers
                         Student student = new Student
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            CohortId = reader.GetInt32(reader.GetOrdinal("CohortId")),
+                            FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+                            LastName = reader.GetString(reader.GetOrdinal("LastName")),
+                            SlackHandle = reader.GetString(reader.GetOrdinal("SlackHandle"))
                         };
 
                         students.Add(student);
@@ -109,10 +113,10 @@ namespace StudentExercisesAPI.Controllers
                     cmd.CommandText = @"INSERT INTO Student (FirstName, LastName, SlackHandle, CohortId)
                                         OUTPUT INSERTED.Id
                                         VALUES (@name)";
-                    cmd.Parameters.Add(new SqlParameter("@FirstName", student.firstName));
-                    cmd.Parameters.Add(new SqlParameter("@LastName", student.lastName));
-                    cmd.Parameters.Add(new SqlParameter("@SlackHandle", student.slackHandle));
-                    cmd.Parameters.Add(new SqlParameter("@CohortId", student.cohortId));
+                    cmd.Parameters.Add(new SqlParameter("@FirstName", student.FirstName));
+                    cmd.Parameters.Add(new SqlParameter("@LastName", student.LastName));
+                    cmd.Parameters.Add(new SqlParameter("@SlackHandle", student.SlackHandle));
+                    cmd.Parameters.Add(new SqlParameter("@CohortId", student.CohortId));
 
                     int newId = (int) await cmd.ExecuteScalarAsync();
                     student.Id = newId;
@@ -134,10 +138,10 @@ namespace StudentExercisesAPI.Controllers
                         cmd.CommandText = @"UPDATE Student
                                             SET FirstName = @firstName, LastName = @lastName, SlackHandle = @slackHandle, CohortId = @cohortId
                                             WHERE Id = @id";
-                        cmd.Parameters.Add(new SqlParameter("@FirstName", student.firstName));
-                        cmd.Parameters.Add(new SqlParameter("@LastName", student.lastName));
-                        cmd.Parameters.Add(new SqlParameter("@SlackHandle", student.slackHandle));
-                        cmd.Parameters.Add(new SqlParameter("@CohortId", student.cohortId));
+                        cmd.Parameters.Add(new SqlParameter("@FirstName", student.FirstName));
+                        cmd.Parameters.Add(new SqlParameter("@LastName", student.LastName));
+                        cmd.Parameters.Add(new SqlParameter("@SlackHandle", student.SlackHandle));
+                        cmd.Parameters.Add(new SqlParameter("@CohortId", student.CohortId));
                         cmd.Parameters.Add(new SqlParameter("@id", id));
 
                         int rowsAffected = cmd.ExecuteNonQuery();
