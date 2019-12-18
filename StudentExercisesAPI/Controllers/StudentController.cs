@@ -75,8 +75,8 @@ namespace StudentExercisesAPI.Controllers
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT Id
-                        FROM Student
+                        SELECT s.Id, s.FirstName, s.LastName, s.SlackHandle, s.CohortId
+                        FROM Student s
                         WHERE Id = @id";
                     cmd.Parameters.Add(new SqlParameter("@id", id));
                     SqlDataReader reader = cmd.ExecuteReader();
@@ -87,7 +87,11 @@ namespace StudentExercisesAPI.Controllers
                     {
                         student = new Student
                         {
-                            Id = reader.GetInt32(reader.GetOrdinal("Id"))
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            CohortId = reader.GetInt32(reader.GetOrdinal("CohortId")),
+                            FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+                            LastName = reader.GetString(reader.GetOrdinal("LastName")),
+                            SlackHandle = reader.GetString(reader.GetOrdinal("SlackHandle"))
                         };
                     }
                     reader.Close();
