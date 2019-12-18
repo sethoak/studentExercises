@@ -41,14 +41,18 @@ namespace StudentExercisesAPI.Controllers
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT s.Id, s.FirstName, s.LastName, s.CohortId, s.SlackHandle , c.[Name] AS CohortName, c.Id AS CohortNameId
+                    cmd.CommandText = @"SELECT s.Id, s.FirstName, s.LastName, s.CohortId, s.SlackHandle , c.[Name] AS CohortName, c.Id AS CohortNameId, e.Name AS ExerciseName, e.Language AS ExerciseLanguage
                                       FROM Student s
-                                      LEFT JOIN Cohort c ON s.CohortId = c.Id";
+                                      LEFT JOIN Cohort c ON s.CohortId = c.Id
+                                      INNER JOIN  StudentExercise se ON se.StudentId = s.Id
+                                      INNER JOIN Exercise e ON e.Id = se.ExerciseId";
                     SqlDataReader reader = cmd.ExecuteReader();
                     List<Student> students = new List<Student>();
 
                     while (reader.Read())
                     {
+                       
+
                         Student student = new Student
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
@@ -62,6 +66,13 @@ namespace StudentExercisesAPI.Controllers
 
                                 Id = reader.GetInt32(reader.GetOrdinal("CohortNameId")),
                                 Name = reader.GetString(reader.GetOrdinal("CohortName")),
+                            },
+
+                            Exercise = new Exercise()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                                Name = reader.GetString(reader.GetOrdinal("ExerciseName")),
+                                Language = reader.GetString(reader.GetOrdinal("ExerciseLanguage"))
                             }
                         };
 
