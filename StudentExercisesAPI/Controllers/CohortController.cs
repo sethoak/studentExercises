@@ -41,9 +41,15 @@ namespace StudentExercisesAPI.Controllers
                 conn.Open();
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT c.Id, c.[Name], s.Id AS StudentId, s.FirstName AS StudentFirstName, s.LastName AS StudentLastName, s.SlackHandle as StudentSlackHandle, s.CohortId AS StudentCohortId
+                    cmd.CommandText = @"SELECT c.Id, c.[Name], 
+                                      s.Id AS StudentId, 
+                                      s.FirstName AS StudentFirstName, 
+                                      s.LastName AS StudentLastName, 
+                                      s.SlackHandle as StudentSlackHandle, 
+                                      s.CohortId AS StudentCohortId
                                       FROM Cohort c
-                                      LEFT JOIN Student s ON c.Id = s.CohortId";
+                                      LEFT JOIN Student s ON c.Id = s.CohortId
+                                      LEFT JOIN Instructor i ON c.Id = i.CohortId";
                     SqlDataReader reader = cmd.ExecuteReader();
                     List<Cohort> cohorts = new List<Cohort>();
                     List<Student> students = new List<Student>();
