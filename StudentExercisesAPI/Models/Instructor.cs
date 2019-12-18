@@ -12,5 +12,7 @@ namespace StudentExercisesAPI.Models
         public Instructors Instructor { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string SlackHandle { get; set; }
+        public Cohort Cohort { get; set; }
     }
 }
